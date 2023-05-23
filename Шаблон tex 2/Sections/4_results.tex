@@ -1,0 +1,95 @@
+\section{Результаты кластеризации и их влияние на точность\linebreak \text{восстановления} текста}
+
+\begin{table}[ht]
+\newrobustcmd{\B}{\bfseries}
+\renewcommand\tabularxcolumn[1]{m{#1}}
+\begin{tabularx}{1\textwidth}
+{ 
+  | >{\hsize=4em\raggedright\arraybackslash}X
+  ||>{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X
+  ||>{\centering\arraybackslash}X
+  |>{\centering\arraybackslash}X|}
+    \hline
+        & Adjusted rand score & Homogeneity Score & Медианная точность &  Максимальная точность  \\ \hline\hline
+        MFCC                  &    0.317 &    0.766  &  0.720  &   0.756  \\ \hline
+        MFCC + UMAP           &    0.426 &    0.932  &  0.890  &   0.901 \\ \hline
+        MFCC + UMAP + CBoS    & \B 0.481 & \B 0.937  &\B0.895  &\B 0.905  \\ \hline
+\end{tabularx}
+\captionof{table}{Сравнение качества восстановления текста для различных наборов признаков}
+\label{tab:text_from_clussters}
+\end{table}
+
+\section{Финальные результаты восстановления текста на каждом\linebreak \text{этапе}}
+
+\begin{table}[ht]
+\newrobustcmd{\B}{\bfseries}
+\renewcommand\tabularxcolumn[1]{m{#1}}
+\begin{tabularx}{1\textwidth}
+{ 
+  |  >{\raggedright\arraybackslash\hspace{0pt}}X 
+  | >{\centering\arraybackslash\hspace{0pt}}X
+  ||>{\centering\arraybackslash\hspace{0pt}}X
+  | >{\centering\arraybackslash\hspace{0pt}}X|}
+    \hline
+        \multicolumn{2}{|c||}{}
+        &   Наши результаты & Результаты оригинальной работы \\ \hline\hline
+        \multirow{3}{6em}{Восстановление из кластеров}   
+                                            & Псевдослучайный текст  & \B0.902  &   0.762  \\ \cline{2-4}
+                                            & Лингвистическая модель & \B0.912  &   0.872  \\ \hline \hline
+        \multirow{3}{6em}{Цикл классификации}   
+                                            & Псевдослучайный текст  & \B0.965  &   0.924  \\ \cline{2-4}
+                                            & Лингвистическая модель &   0.955  & \B0.963  \\ \hline
+\end{tabularx}
+\captionof{table}{Сравнение посимвольной точности восстановления текста с оригинальной работой}
+\label{tab:final_text_accuracy}
+\end{table}
+
+
+\subsection{Сравнение различных алгоритмов классификации}
+\label{section:classifiers comparation}
+В таблице \ref{tab:classifiers comparation}.
+
+\begin{table}[ht]
+\renewcommand\tabularxcolumn[1]{m{#1}}
+\newrobustcmd{\B}{\bfseries}
+\begin{tabularx}{1\textwidth}
+{ 
+  | >{\raggedright\arraybackslash}X 
+  ||>{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X
+  |>{\centering\arraybackslash}X|}
+    \hline
+                    & Линейный дискриминантный анализ & Случайный лес  & Логистическая регрессия \\ \hline\hline
+        Первый проход    &    0.928                     & \B 0.944     &  0.935  \\ \hline
+        Второй проход    &    0.931                     & \B 0.962     &  0.937  \\ \hline
+        Третий проход    &    0.928                     & \B 0.963     &  0.937  \\ \hline
+\end{tabularx}
+\captionof{table}{Сравнение качества восстановления текста при использовании различных алгоритмов классификации}
+\label{tab:classifiers comparation}
+\end{table}
+
+\section{Сравнение качества восстановления текста с различными \linebreak \text{условиями} записи звука}
+
+\begin{table}[ht]
+\renewcommand\tabularxcolumn[1]{m{#1}}
+\newrobustcmd{\B}{\bfseries}
+\begin{tabularx}{1\textwidth}
+{ 
+  |>{\raggedright\arraybackslash}X 
+  ||>{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X
+  |>{\centering\arraybackslash}X|}
+    \hline
+                                       & 1-я установка & 2-я установка & 3-я установка \\ \hline\hline
+        Восстановление из кластеров    &    0.902      &    0.809        &  0.7        \\ \hline
+        Цикл классификации             & \B 0.965      &    0.936        &  0.866      \\ \hline
+\end{tabularx}
+\centering
+\captionof{table}{Сравнение качества восстановления псевдослучайного текста с различными условиями записи звука}
+\label{tab:keyboards comparation}
+\end{table}
+
+\section{Ограничения настоящего подхода и дальнейшие исследования}
+\label{section:limitations}
+Ковычки в \textquote{полевых} условиях.

@@ -1,0 +1,68 @@
+\documentclass[a4paper,14pt,russian]{extreport}
+\input{header.tex}
+
+\begin{document}
+
+\newcounter{oldtocdepth}
+
+\newcommand{\hidefromtoc}{%
+  \setcounter{oldtocdepth}{\value{tocdepth}}%
+  \addtocontents{toc}{\protect\setcounter{tocdepth}{-10}}%
+}
+
+\newcommand{\unhidefromtoc}{%
+  \addtocontents{toc}{\protect\setcounter{tocdepth}{\value{oldtocdepth}}}%
+}
+
+\hidefromtoc
+\likechapter{Реферат}
+\subfile{Sections/0_overview}
+\newpage
+
+\likechapter{ПЕРЕЧЕНЬ СОКРАЩЕНИЙ И ОБОЗНАЧЕНИЙ}
+\subfile{Sections/glossarium}
+\newpage
+\unhidefromtoc
+
+
+\renewcommand\contentsname{Содержание}
+\tableofcontents
+
+\newpage
+\likechapter{Введение}
+\subfile{Sections/1_introduction}
+
+\chapter{ОБЗОР ПРЕДМЕТНОЙ ОБЛАСТИ}
+\subfile{Sections/2_overview_of_the_subject_area}
+
+\chapter{АРХИТЕКТУРА АКУСТИЧЕСКОЙ КЛАВИАТУРНОЙ АТАКИ}
+\subfile{Sections/3_solution_method}
+
+\chapter{РЕЗУЛЬТАТЫ}
+\subfile{Sections/4_results}
+
+\newpage
+\likechapter{Заключение}
+\subfile{Sections/5_conclusion}
+
+\newpage
+\subfile{Sections/6_bibliography}
+
+\newpage
+
+\addcontentsline{toc}{likechapter}{ПРИЛОЖЕНИЕ А Пример восстановленного текста}
+\hidefromtoc
+\likechapter{Приложение А}
+\subfile{Sections/appendix_A}
+
+
+\likechapter{Приложение Б}
+\subfile{Sections/appendix_B}
+
+% \newpage
+% \listoffigures
+% \newpage
+% \listoftables
+%\newpage
+%\listoflistings
+\end{document}
